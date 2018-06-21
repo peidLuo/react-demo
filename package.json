@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reach/router": "^1.1.1",
     "@rematch/core": "^1.0.0-beta.2",
     "isomorphic-unfetch": "^2.0.0",
     "prop-types": "^15.6.2",
