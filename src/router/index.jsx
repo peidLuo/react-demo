@@ -1,11 +1,11 @@
-import { React } from 'react';
+import React from 'react';
 import { Router } from '@reach/router';
-import App from '../App';
+import PassPort from '../components/PassPort';
 
-const list = () => (
+const router = () => (
   <Router>
-    <App path="/" />
+    <PassPort path="/" />
   </Router>
 );
 
-export default list;
+export default router;

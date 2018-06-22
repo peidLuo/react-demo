@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class PassPort extends Component {
   static propTypes = {
@@ -40,4 +41,13 @@ class PassPort extends Component {
     );
   }
 }
-export default PassPort;
+
+const mapState = state => ({
+  clinicId: state.clinicId,
+});
+
+const mapDispatch = ({ clinicId: { getClinicId } }) => ({
+  getClinicId: () => getClinicId('/auth.htmls'),
+});
+
+export default connect(mapState, mapDispatch)(PassPort);
