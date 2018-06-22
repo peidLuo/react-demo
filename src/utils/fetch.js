@@ -1,5 +1,5 @@
 import { stringify } from 'querystring';
-import 'whatwg-fetch'
+import 'whatwg-fetch';
 import BASE from './config';
 
 export default {
