@@ -4,7 +4,9 @@ import BASE from './config';
 
 export default {
   async get(path, data) {
-    return fetch(`${BASE}${path}?${stringify(data)}`);
+    return fetch(`${BASE}${path}?${stringify(data)}`, {
+      credentials: 'include',
+    });
   },
   async post(path, data) {
     const option = {

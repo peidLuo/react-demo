@@ -7,6 +7,7 @@ module.exports = {
     },
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "function-paren-newline": ["error", "consistent"],
     },
     "globals": {
         "document": true,

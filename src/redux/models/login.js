@@ -5,14 +5,15 @@ const login = {
   reducers: {
     // handle state changes with pure functions
     setClinicId(state, payload) {
-      return state + payload;
+      return payload;
     },
   },
   effects: {
     // handle state changes with impure functions.
     // use async/await for async actions
-    async getClinicId(payload) {
-      const data = await fetch.get(payload);
+    async getClinicId() {
+      const data = await fetch.get('/login.htmls');
+      console.log(data);
       this.setClinicId(data.clinicId);
     },
   },
