@@ -9,7 +9,14 @@ const { Header, Sider, Content } = Layout;
 class SiderDemo extends Component {
   state = {
     collapsed: false,
+    menu: [],
   };
+  componentDidMount = () => {
+    this.setState({
+      menu: this.props.user.map(item => { title: item }),
+    });
+    console.log(this.props.user.map(item => { title: item }));
+  }
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed,
@@ -46,6 +53,7 @@ class SiderDemo extends Component {
           }}
           >
             Content
+            {this.state.menu}
             <Link to="login" href="/">Invoices</Link>
           </Content>
         </Layout>
