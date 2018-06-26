@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Icon } from 'antd';
+import { Link } from '@reach/router';
+import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
 
 const { Header, Sider, Content } = Layout;
-
+/* eslint react/prop-types: 0 */
 class SiderDemo extends Component {
   state = {
     collapsed: false,
@@ -22,18 +25,12 @@ class SiderDemo extends Component {
         >
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1">
-              <Icon type="user" />
-              <span>nav 1</span>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="video-camera" />
-              <span>nav 2</span>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Icon type="upload" />
-              <span>nav 3</span>
-            </Menu.Item>
+            {this.props.user.map(item => (
+              <Menu.Item key={item}>
+                <Icon type="user" />
+                <span>{item}</span>
+              </Menu.Item>
+            ))}
           </Menu>
         </Sider>
         <Layout>
@@ -49,6 +46,7 @@ class SiderDemo extends Component {
           }}
           >
             Content
+            <Link to="login" href="/">Invoices</Link>
           </Content>
         </Layout>
       </Layout>
@@ -56,4 +54,12 @@ class SiderDemo extends Component {
   }
 }
 
-export default SiderDemo;
+const mapState = state => ({
+  user: state.user,
+});
+
+const mapDispatch = ({ user: { getUser } }) => ({
+  getUser: () => getUser(),
+});
+
+export default connect(mapState, mapDispatch)(SiderDemo);

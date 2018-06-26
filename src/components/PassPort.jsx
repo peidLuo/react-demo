@@ -15,10 +15,7 @@ class PassPort extends Component {
   //   getClinicId: PropTypes.func.isRequired,
   // }
   componentDidMount = () => {
-    const clinicCookie = document.cookie.indexOf('CLINICID') !== -1;
-    if (!clinicCookie) {
-      this.props.getAuth({});
-    }
+    this.props.getAuth({});
   }
   handleSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +32,7 @@ class PassPort extends Component {
         <Modal
           title="admin auth"
           wrapClassName="vertical-center-modal"
-          visible={this.props.clinicId === 0}
+          visible={this.props.clinicId === '-1'}
           closable={false}
           footer={null}
         >
@@ -89,6 +86,4 @@ const mapDispatch = ({ clinicId: { getAuth } }) => ({
   getAuth: payload => getAuth(payload),
 });
 
-const PassPortExp = Form.create()(PassPort);
-
-export default connect(mapState, mapDispatch)(PassPortExp);
+export default connect(mapState, mapDispatch)(Form.create()(PassPort));
