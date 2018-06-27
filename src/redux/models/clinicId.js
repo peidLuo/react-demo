@@ -30,7 +30,7 @@ const clinicId = {
     async getClinicId() {
       const data = await fetch.get('/login.htmls');
       try {
-        const json = JSON.parse(await data.text());
+        const json = await data.json();
         if (json.clinicId === '-1') {
           message.error('请先授权登录');
         } else {

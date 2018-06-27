@@ -6,6 +6,7 @@ export default {
   async get(path, data) {
     return fetch(`${BASE}${path}?${stringify(data)}`, {
       credentials: 'include',
+      'Content-Type': 'application/json',
     });
   },
   async post(path, data) {

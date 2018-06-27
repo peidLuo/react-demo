@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Icon } from 'antd';
-import { Link } from '@reach/router';
 import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 
 const { Header, Sider, Content } = Layout;
+const TYPE = ['appstore-o', 'user', 'setting', 'solution', 'red-envelope', 'area-chart', 'cloud', 'message'];
+const PATH = ['/', '/dot', '/setting', '/pharmacy', '/finance', '/report', '/servers'];
+
 /* eslint react/prop-types: 0 */
 class SiderDemo extends Component {
   state = {
     collapsed: false,
-    menu: [],
+    current: '',
   };
   componentDidMount = () => {
+    if (!this.props.user.length) {
+      this.props.getUser();
+    }
+  }
+  onMenuClick = ({ item, key }) => {
     this.setState({
-      menu: this.props.user.map(item => { title: item }),
+      current: key,
     });
-    console.log(this.props.user.map(item => { title: item }));
+    this.props.navigate(item.props.path);
   }
   toggle = () => {
     this.setState({
@@ -29,12 +36,18 @@ class SiderDemo extends Component {
           trigger={null}
           collapsible
           collapsed={this.state.collapsed}
+          width={120}
         >
           <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            {this.props.user.map(item => (
-              <Menu.Item key={item}>
-                <Icon type="user" />
+          <Menu
+            theme="dark"
+            mode="inline"
+            onSelect={this.onMenuClick}
+            selectedKeys={[this.state.current || this.props.user[0]]}
+          >
+            {this.props.user.map((item, index) => (
+              <Menu.Item key={item} path={PATH[index]}>
+                <Icon type={TYPE[index]} />
                 <span>{item}</span>
               </Menu.Item>
             ))}
@@ -52,9 +65,7 @@ class SiderDemo extends Component {
             margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280,
           }}
           >
-            Content
-            {this.state.menu}
-            <Link to="login" href="/">Invoices</Link>
+            {this.props.children}
           </Content>
         </Layout>
       </Layout>

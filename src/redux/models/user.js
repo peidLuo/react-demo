@@ -1,4 +1,5 @@
 import { message } from 'antd';
+import { navigate } from '@reach/router';
 import fetch from '../../utils/fetch';
 
 const user = {
@@ -11,15 +12,14 @@ const user = {
     // handle state changes with impure functions.
     // use async/await for async actions
     async getUser(payload) {
-      let data = {};
-      if (payload.password) {
-        data = await fetch.get('/Login.htmls', payload);
-      } else {
-        data = await fetch.get('/login.htmls');
-      }
+      const data = await fetch.get('/Login.htmls', payload);
       const str = await data.text();
       try {
         const start = str.indexOf('id="left"');
+        if (start === -1) {
+          navigate('/login');
+          return;
+        }
         const end = str.indexOf('id="main"');
         const div = str.slice(start - 5, end - 5);
 
@@ -29,9 +29,9 @@ const user = {
         // const secondMenu = Array.from(el.querySelectorAll('.master-menu-nav  span'))
         // .map(item => item.innerHTML);
         this.setUser(firstMenu);
-        message.error('登录成功！');
+        message.success('登录成功！');
       } catch (e) {
-        message.success('登录失败！');
+        message.error('登录失败！');
       }
     },
   },
