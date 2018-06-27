@@ -3,18 +3,20 @@ import { Router } from '@reach/router';
 import Main from '../layout/main';
 import NotFound from '../views/NotFound';
 import Index from '../views/login/index';
-import Dot from '../components/DotList';
-import Counter from '../views/counter/index';
-import Servers from '../views/servers/index';
-import Setting from '../views/setting/index';
+import asyncComponent from '../utils/AsyncComponent';
+import Order from '../views/counter/order';
+
+const AsyncSetting = asyncComponent(() => import('../views/setting/index'));
+const AsyncCounter = asyncComponent(() => import('../views/counter/index'));
 
 const router = () => (
   <Router>
     <Main path="/">
-      <Dot path="/" />
-      <Counter path="counter" />
-      <Servers path="servers" />
-      <Setting path="setting" />
+      <AsyncCounter path="counter">
+        <Order path="order" />
+      </AsyncCounter>
+      <AsyncSetting path="setting" />
+      <NotFound default />
     </Main>
     <Index path="login" />
     <NotFound default />

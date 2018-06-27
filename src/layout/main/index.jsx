@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 const { Header, Sider, Content } = Layout;
 const TYPE = ['appstore-o', 'user', 'setting', 'solution', 'red-envelope', 'area-chart', 'cloud', 'message'];
-const PATH = ['/', '/dot', '/setting', '/pharmacy', '/finance', '/report', '/servers'];
+const PATH = ['/counter', '/dot', '/setting', '/pharmacy', '/finance', '/report', '/servers'];
 
 /* eslint react/prop-types: 0 */
 class SiderDemo extends Component {
