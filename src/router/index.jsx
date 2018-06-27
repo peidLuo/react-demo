@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router } from '@reach/router';
+import { Router, Redirect } from '@reach/router';
 import Main from '../layout/main';
 import NotFound from '../views/NotFound';
 import Index from '../views/login/index';
@@ -11,6 +11,7 @@ const AsyncCounter = asyncComponent(() => import('../views/counter/index'));
 
 const router = () => (
   <Router>
+    <Redirect from="/" to="/counter" />
     <Main path="/">
       <AsyncCounter path="counter">
         <Order path="order" />

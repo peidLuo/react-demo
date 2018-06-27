@@ -9,7 +9,7 @@ const FormItem = Form.Item;
 class LoginForm extends Component {
   shouldComponentUpdate = (prevProps) => {
     if (prevProps.user.length) {
-      navigate('/');
+      navigate('/counter');
     }
     return true;
   }
